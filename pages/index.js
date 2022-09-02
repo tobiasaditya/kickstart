@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { Button, Card } from "semantic-ui-react";
 import factory from "../ethereum/factory";
-
+import 'semantic-ui-css/semantic.min.css';
+import Layout from "../components/Layout";
 
 class CampaignIndex extends Component {
     static async getInitialProps() {
@@ -9,8 +11,26 @@ class CampaignIndex extends Component {
 
     }
 
+    renderCampaigns() {
+        const items = this.props.campaigns.map((address) => {
+            return {
+                header: address,
+                description: <a>View Campaign</a>,
+                fluid: true
+            }
+        })
+        return <Card.Group items={items}></Card.Group>
+    }
+
     render() {
-        return <div> Campaign Index {this.props.campaigns[0]}</div>
+        return <Layout>
+            <div>
+                <h3>Open Campaigns</h3>
+                <Button floated="right" content="Create Campaign" icon="add square" primary={true}></Button>
+                {this.renderCampaigns()}
+
+            </div>
+        </Layout>
     }
 }
 
