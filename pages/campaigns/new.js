@@ -18,11 +18,11 @@ class CampaignNew extends Component {
         try {
             const accounts = await web3.eth.getAccounts()
             await factory.methods.createCampaign(this.state.minimumContribution).send({ from: accounts[0] })
+            Router.pushRoute("/") //Only route to home if success
         } catch (err) {
             this.setState({ errorMessage: err.message })
         }
         this.setState({ loading: false })
-        Router.pushRoute("/")
 
     }
 
