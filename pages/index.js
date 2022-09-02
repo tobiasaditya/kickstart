@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, Card } from "semantic-ui-react";
 import factory from "../ethereum/factory";
 import Layout from "../components/Layout";
-
+import { Link } from "../routes"
 class CampaignIndex extends Component {
     static async getInitialProps() {
         const campaigns = await factory.methods.getDeployedCampaigns().call();
@@ -25,7 +25,11 @@ class CampaignIndex extends Component {
         return <Layout>
             <div>
                 <h3>Open Campaigns</h3>
-                <Button floated="right" content="Create Campaign" icon="add square" primary={true}></Button>
+                <Link route="/campaigns/new">
+                    <a>
+                        <Button floated="right" content="Create Campaign" icon="add square" primary={true} ></Button>
+                    </a>
+                </Link>
                 {this.renderCampaigns()}
 
             </div>
